@@ -1,5 +1,5 @@
 # Professor Pollati's Unity Utilities
-This repo contains the Unity Editor scripts that can be used in my classes to help make some task as simple as a menu choice. These editor scripts should work on both Mac and Windows.
+This repo contains the Unity Editor scripts that can be used in my classes to help make some task as simple as a menu choice. These editor scripts work on both Mac and Windows.
 
 ## Releases
 In the [Releases](https://github.com/ProfPollati/ProfPollatiUnityUtilities/releases), you will find the latest ProfPollatiUtilities.unitypackage which will contains all the files you need. Just go in the menu **Assets** -> **Import Package** -> **Custom Package** and select the unity package.
@@ -10,7 +10,11 @@ In the [Releases](https://github.com/ProfPollati/ProfPollatiUnityUtilities/relea
 This basic script will produce the Linux, Mac, and Windows builds and zip them for you. That way, you have the required releases, named properly for the GitHub Releases required for submitting in your project.
 
 Once it completes, it will pop open a requester where you can hit _Okay_ or _Show Build Folder_ to have the Build folder show up in Explorer on Windows or in the Finder for Mac.
+
 ![](images/BuildComplete.png)
+
+If you do not have all the required build support installed (Windows Build Support, Linux Build Support, and Mac Build Support) for Unity, the completion message will tell you which builds did not get genrated. In order to enable those build, you have to launch the Unity Download Assistant and manually select those. (For info [see "No mac build option on PC?"](http://answers.unity3d.com/questions/1114042/no-mac-build-option-on-pc.html))
+
 #### Notes
 In order to easily produce a ZIP file with Unity 5.4 or lower, the library [Ionic.Zip.Unity](https://github.com/r2d2rigo/dotnetzip-for-unity) from https://github.com/r2d2rigo/dotnetzip-for-unity in needed in the Assets/Plugin/ folder.
 
