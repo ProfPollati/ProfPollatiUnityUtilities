@@ -12,7 +12,7 @@ public class LaunchDuplicator : EditorWindow {
 
 	private string unityLocation = (Application.platform==RuntimePlatform.OSXEditor) ? "/Applications/Unity/Unity.app/Contents/MacOS/Unity" : "C:\\Program Files\\Unity\\Editor\\Unity.exe";
 	private string baseDir= Directory.GetCurrentDirectory().ToString();
-	private string destDir = Directory.GetParent(Directory.GetCurrentDirectory()).ToString() + Path.DirectorySeparatorChar + PlayerSettings.productName + "_COPY";
+    private string destDir = ""; // Moved to on Enable
 
 	private string output = "";
 
@@ -28,8 +28,12 @@ public class LaunchDuplicator : EditorWindow {
 		//Show existing window instance. If one doesn't exist, make one.
 		EditorWindow.GetWindow(typeof(LaunchDuplicator));
 	}
-	
-	void OnGUI() {
+
+    private void OnEnable() {
+        destDir = Directory.GetParent(Directory.GetCurrentDirectory()).ToString() + Path.DirectorySeparatorChar + PlayerSettings.productName + "_COPY";
+    }
+
+    void OnGUI() {
 		// Start main scroll area
 		scrollArea = EditorGUILayout.BeginScrollView(scrollArea);
 
@@ -124,7 +128,7 @@ public class LaunchDuplicator : EditorWindow {
 			}
 
 			// Save Project
-			EditorApplication.SaveAssets();
+			AssetDatabase.SaveAssets();
 			output += "\n" + "Saved assets";
 		}
 

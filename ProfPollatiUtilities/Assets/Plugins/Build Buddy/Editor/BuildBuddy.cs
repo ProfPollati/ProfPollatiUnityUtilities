@@ -1,9 +1,7 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
 using System;
-using System.Diagnostics;
 using UnityEngine;
-using System.IO.Compression;
 using System.IO;
 using Ionic.Zip;
 
@@ -12,7 +10,7 @@ public class BuildBuddy : MonoBehaviour {
 	public static void BuildGame () {
 		BuildTarget[] targets = {
 			BuildTarget.StandaloneLinuxUniversal,
-			BuildTarget.StandaloneOSXIntel64,
+			BuildTarget.StandaloneOSX,
 			BuildTarget.StandaloneWindows,
 			BuildTarget.StandaloneWindows64
 		};
@@ -31,7 +29,7 @@ public class BuildBuddy : MonoBehaviour {
 			buildPath = baseDir + projectName + targetPrefix [i];
 
 			// Figure the extension for the executable
-			if (targets[i]==BuildTarget.StandaloneOSXIntel) {
+			if (targets[i]==BuildTarget.StandaloneOSX) {
 				buildName = projectName + ".app";
 			} else {
 				buildName = projectName + ".exe";
