@@ -44,7 +44,7 @@ public class LaunchDuplicator : EditorWindow {
 		EditorGUILayout.Space();
 
 		// Delete option
-		EditorGUILayout.ToggleLeft("Delete existing copy before launching",deleteBeforeCopy); 
+		deleteBeforeCopy = EditorGUILayout.ToggleLeft("Delete existing copy before launching",deleteBeforeCopy); 
 
 		// If the duplicate Unity is running, allow us to terminate it
 		if(newUnity!=null && newUnity.HasExited==false) {
@@ -202,7 +202,7 @@ public class LaunchDuplicator : EditorWindow {
 		DirectoryInfo[] dirs = dir.GetDirectories();
 
 		// Ignore the temp folder
-		if(destDirName.IndexOf("\\Temp")<1) {
+		if(destDirName.IndexOf("\\Temp")<1 && destDirName.IndexOf("\\.vs")<1) {
 			// If the destination directory doesn't exist, create it.
 			if (!Directory.Exists(destDirName)) {
 				Directory.CreateDirectory(destDirName);
