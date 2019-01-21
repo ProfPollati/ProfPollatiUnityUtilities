@@ -19,13 +19,21 @@ Once it completes, it will pop open a requester where you can hit _Okay_ or _Sho
 
 If you do not have all the required build support installed (Windows Build Support, Linux Build Support, and Mac Build Support) for Unity, the completion message will tell you which builds did not get genrated. 
 
-In order to enable those build, you have to launch the Unity Download Assistant and manually select those. (For info [see "No mac build option on PC?"](http://answers.unity3d.com/questions/1114042/no-mac-build-option-on-pc.html))
+In order to enable those build:
+
+If you are using Unity Hub, you can easily add the components missing:
+
+![](images/AddComponents.png)
+
+Otherwise, you have to launch the Unity Download Assistant and manually select those. (For info [see "No mac build option on PC?"](http://answers.unity3d.com/questions/1114042/no-mac-build-option-on-pc.html))
 
 #### Other Notes
 In order to easily produce a ZIP file with Unity 5.4 or lower, the library [Ionic.Zip.Unity](https://github.com/r2d2rigo/dotnetzip-for-unity) from https://github.com/r2d2rigo/dotnetzip-for-unity in needed in the Assets/Plugin/ folder.
 
 
 ### Launch Duplicator
+*NOTE: Not yet tested with Unity Hub*
+
 When trying to test out your project for the Multiplayer assignments, you either have to make a build of the game and launch that build and launch the editor, or you can make a duplicate of your project and launch that in another instance of Unity. Launching another instance makes it a little faster to changing things around, but it can take more time to copy the files, _unless_ you use this script.
 
 ![](images/LaunchWindow.png)
