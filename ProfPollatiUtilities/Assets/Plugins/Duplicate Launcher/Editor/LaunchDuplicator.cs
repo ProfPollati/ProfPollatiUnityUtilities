@@ -10,9 +10,9 @@ using System.Diagnostics;
 public class LaunchDuplicator : EditorWindow {
 	private static Process newUnity = null;
 
-	private string unityLocation = (Application.platform==RuntimePlatform.OSXEditor) ? "/Applications/Unity/Unity.app/Contents/MacOS/Unity" : "C:\\Program Files\\Unity\\Editor\\Unity.exe";
-	private string baseDir= Directory.GetCurrentDirectory().ToString();
-    private string destDir = ""; // Moved to on Enable
+	private string unityLocation = ""; // Moved to on Enable
+	private string baseDir = ""; // Moved to on Enable
+	private string destDir = ""; // Moved to on Enable
 
 	private string output = "";
 
@@ -22,29 +22,29 @@ public class LaunchDuplicator : EditorWindow {
 	private Vector2 scrollArea;
 	private Vector2 scrollOutputArea;
 
-	// Add menu item named "Launch Duplicator" to a new menu
-	[MenuItem("Pollati Utilities/Launch Duplicator")]
+	// Add menu item named "Duplicate Launcher" to a new menu
+	[MenuItem("Pollati Utilities/Duplicate Launcher")]
 	public static void ShowWindow() {
 		//Show existing window instance. If one doesn't exist, make one.
-		EditorWindow.GetWindow(typeof(LaunchDuplicator));
+		EditorWindow.GetWindow(typeof(LaunchDuplicator),false,"Duplicate Launcher");
 	}
 
-    private void OnEnable() {
-        destDir = Directory.GetParent(Directory.GetCurrentDirectory()).ToString() + Path.DirectorySeparatorChar + PlayerSettings.productName + "_COPY";
-    }
+	private void OnEnable() {
+		baseDir = Directory.GetCurrentDirectory().ToString();
+		destDir = Directory.GetParent(Directory.GetCurrentDirectory()).ToString() + Path.DirectorySeparatorChar + PlayerSettings.productName + "_COPY";
+		unityLocation = EditorApplication.applicationPath;
+	}
 
-    void OnGUI() {
+	void OnGUI() {
 		// Start main scroll area
 		scrollArea = EditorGUILayout.BeginScrollView(scrollArea);
 
-		// Title
-		GUILayout.Label ("Launch Duplicator", EditorStyles.boldLabel);
 		// Description
 		GUILayout.Label ("Simplifies testing multiplayer networking. Click the button to save the project (if not playing), duplicate it, and launch a new instance of Unity with the copied project.", EditorStyles.wordWrappedLabel);
 		EditorGUILayout.Space();
 
 		// Delete option
-		deleteBeforeCopy = EditorGUILayout.ToggleLeft("Delete existing copy before launching",deleteBeforeCopy); 
+		deleteBeforeCopy = EditorGUILayout.ToggleLeft("Delete existing copy before launching",deleteBeforeCopy);
 
 		// If the duplicate Unity is running, allow us to terminate it
 		if(newUnity!=null && newUnity.HasExited==false) {
@@ -61,7 +61,7 @@ public class LaunchDuplicator : EditorWindow {
 			} else {
 				if(GUILayout.Button("Save, Duplicate, and Launch")) {
 					DuplicateAndLaunch();
-				}	
+				}
 			}
 		}
 		EditorGUILayout.Space();
@@ -79,10 +79,10 @@ public class LaunchDuplicator : EditorWindow {
 
 			// Show the location of Unity executable, allow it to be edited in case the user wants to
 			GUILayout.Label ("Unity Application Location: ", EditorStyles.boldLabel);
-			unityLocation = GUILayout.TextField (unityLocation, EditorStyles.textField);	
+			unityLocation = GUILayout.TextField (unityLocation, EditorStyles.textField);
 		}
 		EditorGUILayout.Space();
-	
+
 		// Show output so we can see what is going on, or wrong.
 		GUILayout.Label ("Output ", EditorStyles.boldLabel);
 
@@ -96,7 +96,7 @@ public class LaunchDuplicator : EditorWindow {
 	}
 
 	/// <summary>
-	/// Handles saving, deleting, duplicating, and launching 
+	/// Handles saving, deleting, duplicating, and launching
 	/// </summary>
 	void DuplicateAndLaunch() {
 		output = "Attempting launch duplicate...";
@@ -150,10 +150,10 @@ public class LaunchDuplicator : EditorWindow {
 			}
 		} catch (IOException ex) {
 			if (ex.ToString ().IndexOf ("editor\\FileUtilBindings.gen.cs:75") < 1) {
-				output += "\n" + "*** FAILED: " + ex.ToString () + "***"; 
+				output += "\n" + "*** FAILED: " + ex.ToString () + "***";
 				return;
 			} else {
-				output += "\n" + "I know Unity says it failed, but it is " + Directory.Exists (destDir).ToString () + " that the dest dir exists!"; 
+				output += "\n" + "I know Unity says it failed, but it is " + Directory.Exists (destDir).ToString () + " that the dest dir exists!";
 			}
 		}
 
@@ -166,12 +166,12 @@ public class LaunchDuplicator : EditorWindow {
 			newUnity.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
 			if(!newUnity.Start()) {
-				output += "\n" + "*** FAILED: Could not start Unity instance. ***"; 
+				output += "\n" + "*** FAILED: Could not start Unity instance. ***";
 			} else {
 				output += "\n" + "New instance of Unity running!";
 			}
 		} else {
-			output += "\n" + "*** FAILED: Unity Location \"" + unityLocation + "\" does not exist! ***"; 
+			output += "\n" + "*** FAILED: Unity Location \"" + unityLocation + "\" does not exist! ***";
 		}
 	}
 

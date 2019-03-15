@@ -51,7 +51,7 @@ public class BuildBuddy : MonoBehaviour {
 				UnityEngine.Debug.Log ("Building"+targetPrefix[i]+ " Complete!");
 			} catch(Exception e) {
 				// Failed...
-				UnityEngine.Debug.Log ("Building"+targetPrefix[i]+ " FAILED!");
+				UnityEngine.Debug.Log ("Building"+targetPrefix[i]+ " FAILED! " + e.ToString());
 				failures += "\nFailed Building"+targetPrefix[i];
 			}
 		}
