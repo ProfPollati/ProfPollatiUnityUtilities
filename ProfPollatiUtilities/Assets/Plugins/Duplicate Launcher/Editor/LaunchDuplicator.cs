@@ -32,7 +32,7 @@ public class LaunchDuplicator : EditorWindow {
 	private void OnEnable() {
 		baseDir = Directory.GetCurrentDirectory().ToString();
 		destDir = Directory.GetParent(Directory.GetCurrentDirectory()).ToString() + Path.DirectorySeparatorChar + PlayerSettings.productName + "_COPY";
-		unityLocation = EditorApplication.applicationPath;
+		unityLocation = EditorApplication.applicationPath + (Application.platform == RuntimePlatform.OSXEditor ? Path.DirectorySeparatorChar + "Contents/MacOS/Unity" : "");
 	}
 
 	void OnGUI() {
