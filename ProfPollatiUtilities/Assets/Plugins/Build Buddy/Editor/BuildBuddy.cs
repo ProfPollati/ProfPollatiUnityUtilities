@@ -1,4 +1,4 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 using UnityEditor;
 using System;
 using UnityEngine;
@@ -6,7 +6,8 @@ using System.IO;
 using Ionic.Zip;
 
 public class BuildBuddy : MonoBehaviour {
-	[MenuItem("Pollati Utilities/Build Buddy")]
+	// Makes a keyboard shortcut by adding a space then "%" for Cmd or Ctrl, "&" for Alt
+	[MenuItem("Pollati Utilities/Build Buddy  %&b",false,1)]
 	public static void BuildGame () {
 		BuildTarget[] targets = {
 #if UNITY_2019_2_OR_NEWER
