@@ -1,4 +1,4 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 // You'll need to include compiler conditions to only compile this if this is going through the Unity Editor, otherwise, you will not be able to compile a Build!
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -23,7 +23,7 @@ public class LaunchDuplicator : EditorWindow {
 	private Vector2 scrollOutputArea;
 
 	// Add menu item named "Duplicate Launcher" to a new menu
-	[MenuItem("Pollati Utilities/Duplicate Launcher")]
+	[MenuItem("Pollati Utilities/Duplicate Launcher",false,2)]
 	public static void ShowWindow() {
 		//Show existing window instance. If one doesn't exist, make one.
 		EditorWindow.GetWindow(typeof(LaunchDuplicator),false,"Duplicate Launcher");
