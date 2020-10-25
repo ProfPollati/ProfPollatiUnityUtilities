@@ -45,9 +45,11 @@ When trying to test out your project for the Multiplayer assignments, you either
 
 ![](images/DuplicateLauncher.png)
 
-This will add a window with controls for you to **Save, Duplicate and Launch**. If you are running the game, it will only **Duplicate and Launch**. You cannot save the scenes or project since it may lead to issue with project. 
+This will add a window with controls for you to **Save, Duplicate and Launch**. If you are running the game, it will only **Duplicate and Launch** since you cannot save the scenes or project since it may lead to issue with project.
 
-Expanding the Details will tell you the location of the project, where it gets duplicated to, and the location of Unity's executable which you can edit incase your is in a different location.
+Once you've made a copy and you only need to update certain files, like scripts, scenes, prefabs or scriptable objects, then you just click on the button for that particular item or copy all of those with _All Items_.
+
+Expanding the _Configs_ will tell you the location of the project, where it gets duplicated to, and the location of Unity's executable which you can edit incase your is in a different location.
 
 ## Quick Switcher
 
