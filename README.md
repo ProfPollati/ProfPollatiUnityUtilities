@@ -1,6 +1,6 @@
 # Professor Pollati's Unity Utilities
 
-This repo contains the Unity Editor scripts that can be used in my classes to help make some task as simple as a menu choice. These editor scripts work on both Mac and Windows.
+This repo contains the Unity Editor scripts that used to be used in my classes to help make some task as simple as a menu choice. These editor scripts should work on both Mac and Windows.
 
 Feel free to use these in your own projects.
 

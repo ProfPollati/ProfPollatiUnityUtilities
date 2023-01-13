@@ -9,6 +9,14 @@ public class BuildBuddy : MonoBehaviour {
 	// Makes a keyboard shortcut by adding a space then "%" for Cmd or Ctrl, "&" for Alt
 	[MenuItem("Pollati Utilities/Build Buddy  %&b",false,1)]
 	public static void BuildGame () {
+
+		if(EditorBuildSettings.scenes.Length==0) {
+			if(EditorUtility.DisplayDialog ("Missing Build Settings", "You do not have scenes in the Build Settings!", "Open Build Settings", "Forget it!")) {
+				EditorWindow.GetWindow(Type.GetType("UnityEditor.BuildPlayerWindow,UnityEditor"));
+			}
+			return;
+		}
+
 		BuildTarget[] targets = {
 #if UNITY_2019_2_OR_NEWER
 			BuildTarget.StandaloneLinux64,
@@ -42,21 +50,21 @@ public class BuildBuddy : MonoBehaviour {
 
 			try {
 				// Build
-				UnityEngine.Debug.Log ("Building"+targetPrefix[i]);
+				UnityEngine.Debug.Log("Building"+targetPrefix[i]);
 				BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, buildPath + Path.DirectorySeparatorChar + buildName, targets[i], BuildOptions.None);
 
 				// Zip
-				UnityEngine.Debug.Log ("Zipping"+targetPrefix[i]);
+				UnityEngine.Debug.Log("Zipping"+targetPrefix[i]);
 				using (ZipFile zip = new ZipFile()) {
 					zip.AddDirectory (buildPath + Path.DirectorySeparatorChar);
 					zip.Save(buildPath + ".zip");
 				}
 
 				// Done
-				UnityEngine.Debug.Log ("Building"+targetPrefix[i]+ " Complete!");
+				UnityEngine.Debug.Log("Building"+targetPrefix[i]+ " Complete!");
 			} catch(Exception e) {
 				// Failed...
-				UnityEngine.Debug.Log ("Building"+targetPrefix[i]+ " FAILED! " + e.ToString());
+				UnityEngine.Debug.Log("Building"+targetPrefix[i]+ " FAILED! " + e.ToString());
 				failures += "\nFailed Building"+targetPrefix[i];
 			}
 		}
@@ -67,8 +75,8 @@ public class BuildBuddy : MonoBehaviour {
 			buildCompleteMessage += "\n\nHowever, the following targets were not built:\n" + failures;
 		}
 
-		if (EditorUtility.DisplayDialog ("Builds complete!", buildCompleteMessage, "Show Build Folder", "Okay")) {
-			EditorUtility.RevealInFinder (baseDir);
+		if (EditorUtility.DisplayDialog("Builds complete!", buildCompleteMessage, "Show Build Folder", "Okay")) {
+			EditorUtility.RevealInFinder(baseDir);
 		}
 	}
 }

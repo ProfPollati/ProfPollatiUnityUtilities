@@ -79,7 +79,7 @@ public class LaunchDuplicator : EditorWindow {
 						GUILayout.Label(EditorGUIUtility.FindTexture("cs Script Icon"),tinyIcons_GUILayoutOption);
 						GUILayout.Label("Scripts");
 					EditorGUILayout.EndHorizontal();
-					
+
 					if (GUI.Button(EditorGUILayout.BeginHorizontal("Button"), GUIContent.none)) { UpdateFolder("Scenes/"); }
 						GUILayout.Label(EditorGUIUtility.FindTexture("BuildSettings.Editor"),tinyIcons_GUILayoutOption);
 						GUILayout.Label("Scenes");
@@ -257,7 +257,10 @@ public class LaunchDuplicator : EditorWindow {
 		DirectoryInfo[] dirs = dir.GetDirectories();
 
 		// Ignore the temp folder
-		if(destDirName.IndexOf("\\Temp")<1 && destDirName.IndexOf("\\.vs")<1) {
+		if(
+			destDirName.IndexOf("\\Temp")<1 && destDirName.IndexOf("\\.vs")<1 &&  // For Windows
+			destDirName.IndexOf("/Temp")<1 && destDirName.IndexOf("/.vs")<1       // For Mac
+		) {
 			// If the destination directory doesn't exist, create it.
 			if (!Directory.Exists(destDirName)) {
 				Directory.CreateDirectory(destDirName);
